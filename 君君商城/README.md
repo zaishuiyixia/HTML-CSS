@@ -4,4 +4,4 @@
 
 商城主页实现了无限滚动循环渐变轮播特效来展示商品，页面设计十分精致、简约、好看。
 
-[预览链接]()
+[预览链接](https://zaishuiyixia.github.io/HTML-CSS/%E5%90%9B%E5%90%9B%E5%95%86%E5%9F%8E/index.html)
