@@ -26,4 +26,5 @@
 
 7. 滚动加载
 
-[项目预览](https://zaishuiyixia.github.io/Project/QQ%20Music/index.html#player?artist=周杰伦&songid=212877900&songname=等你下课(with 杨瑞代)&albummid=003bSL0v4bpKAx&duration=270&songmid=001J5QJL1pRQYB)
+
+[项目预览](https://zaishuiyixia.github.io/Project/QQ%20Music/index.html)
