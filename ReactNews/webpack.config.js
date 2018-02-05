@@ -2,13 +2,23 @@ var debug = process.env.NODE_ENV !== "production";
 var webpack = require('webpack');
 var path = require('path');
 
+const BabiliPlugin = require("babili-webpack-plugin");
 module.exports = {
   devServer: {
     historyApiFallback: true,
   },
+  // performance:{
+  //   hints: 'warning',
+  //   maxEntrypointSize: 100000, //定义最后生成的bundle.js文件的大小，单位bytes, 100k
+  //   maxAssetSize: 450000 //定义图片、css大小,450k
+  // },
   context: path.join(__dirname),
   devtool: debug ? "inline-sourcemap" : null,
-  entry: "./src/js/root.js",
+  entry: {
+    app: "./src/js/root.js",
+    vender: ['react']
+  },
+  devtool: 'source-map',
   module: {
     loaders: [
       {
@@ -26,11 +36,15 @@ module.exports = {
   },
   output: {
     path: __dirname,
-    filename: "./src/bundle.js"
+    filename: "[name].js"
   },
   plugins: debug ? [] : [
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
+    new BabiliPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vender'
+    })
   ],
 };
