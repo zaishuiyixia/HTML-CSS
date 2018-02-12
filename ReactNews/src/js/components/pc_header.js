@@ -8,14 +8,12 @@ import {
 	Form,
 	Input,
 	Button,
-	CheckBox,
 	Modal
 } from 'antd';
 const FormItem = Form.Item;
-const SubMenu = Menu.SubMenu;
 const TabPane = Tabs.TabPane;
-const MenuItemGroup = Menu.ItemGroup;
 import {Link} from 'react-router-dom';
+import PCLogo from '../../images/logo.png';
 class PCHeader extends React.Component {
 	constructor() {
 		super();
@@ -30,7 +28,7 @@ class PCHeader extends React.Component {
 	};
 
 	componentWillMount(){
-		if (localStorage.userid!='') {
+		if (localStorage.userid!=='') {
 			this.setState({hasLogined:true});
 			this.setState({userNickName:localStorage.userNickName,userid:localStorage.userid});
 		}
@@ -41,13 +39,11 @@ class PCHeader extends React.Component {
 		this.setState({modalVisible: value});
 	};
 	handleClick(e) {
-		if (e.key == "register") {
+		if (e.key === "register") {
 			this.setState({current: 'register'});
 			this.setModalVisible(true);
 		} else {
-			{
-				this.setState({current: e.key});
-			}
+			this.setState({current: e.key});
 		}
 	};
 	handleSubmit(e)
@@ -70,16 +66,16 @@ class PCHeader extends React.Component {
 			localStorage.userid= json.UserId;
 			localStorage.userNickName = json.NickUserName;
 		});
-		if (this.state.action=="login") {
+		if (this.state.action==="login") {
 			this.setState({hasLogined:true});
 		}
 		message.success("请求成功！");
 		this.setModalVisible(false);
 	};
 	callback(key) {
-		if (key == 1) {
+		if (key === '1') {
 			this.setState({action: 'login'});
-		} else if (key == 2) {
+		} else if (key === '2') {
 			this.setState({action: 'register'});
 		}
 	};
@@ -91,7 +87,7 @@ class PCHeader extends React.Component {
 	render() {
 		const { getFieldDecorator } = this.props.form;
 		const userShow = this.state.hasLogined
-			? <Menu.Item key="logout" class="register">
+			? <Menu.Item key="logout" className="register">
 					<Button type="primary" htmlType="button">{this.state.userNickName}</Button>
 					&nbsp;&nbsp;
 					<Link target="_blank" to={`/usercenter`}>
@@ -100,7 +96,7 @@ class PCHeader extends React.Component {
 					&nbsp;&nbsp;
 					<Button type="ghost" htmlType="button" onClick={this.logout.bind(this)}>退出</Button>
 				</Menu.Item>
-			: <Menu.Item key="register" class="register">
+			: <Menu.Item key="register" className="register">
 				<Icon type="appstore"/>注册/登录
 			</Menu.Item>;
 		return (
@@ -108,8 +104,8 @@ class PCHeader extends React.Component {
 				<Row>
 					<Col span={2}></Col>
 					<Col span={4}>
-						<a href="/" class="logo">
-							<img src="/src/images/logo.png" alt="logo"/>
+						<a href="/" className="logo">
+							<img src={PCLogo} alt="logo"/>
 							<span>ReactNews</span>
 						</a>
 					</Col>
@@ -141,10 +137,10 @@ class PCHeader extends React.Component {
 							</Menu.Item>
 							{userShow}
 						</Menu>
-						<Modal title="用户中心" wrapClassName="vertical-center-modal" visible={this.state.modalVisible} onCancel= {()=>this.setModalVisible(false)} onOk={() => this.setModalVisible(false)} okText="关闭">
+						<Modal title="用户中心" wrapClassName="vertical-center-modal" visible={this.state.modalVisible} onCancel={()=>this.setModalVisible(false)} onOk={() => this.setModalVisible(false)} okText="关闭">
 							<Tabs type="card" onChange={this.callback.bind(this)}>
 								<TabPane tab="登录" key="1">
-									<Form horizontal onSubmit={this.handleSubmit.bind(this)}>
+									<Form horizontal="true" onSubmit={this.handleSubmit.bind(this)}>
 										<FormItem label="账户">
 											{getFieldDecorator('userName')(<Input placeholder="请输入您的账号" />)}
 										</FormItem>

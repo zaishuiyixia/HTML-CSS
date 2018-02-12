@@ -17,7 +17,11 @@ export default class PCNewsDetails extends React.Component {
 		};
 		fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=getnewsitem&uniquekey=" + this.props.match.params.uniquekey, myFetchOptions).then(response => response.json()).then(json => {
 			this.setState({newsItem: json});
-			document.title = this.state.newsItem.title + " - React News | React 驱动的新闻平台";
+			if (!this.state.newsItem.title) {
+				return document.title = "React News | React 驱动的新闻平台";
+			}else{
+				document.title = this.state.newsItem.title + " - React News | React 驱动的新闻平台";
+			}		
 		});
 	};
 	createMarkup() {
@@ -30,7 +34,8 @@ export default class PCNewsDetails extends React.Component {
 				<Row>
 					<Col span={2}></Col>
 					<Col span={14} className="container">
-						<div class="articleContainer" dangerouslySetInnerHTML={this.createMarkup()}></div>
+						<div className="articleContainer" dangerouslySetInnerHTML={this.createMarkup()}></div>
+						<br />
 						<hr/>
 						<CommonComments uniquekey={this.props.match.params.uniquekey}/>
 					</Col>
